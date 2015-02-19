@@ -3,12 +3,20 @@
 
 ## Write a short comment describing this function
 
-makeCacheMatrix <- function(x = matrix()) {
-  x
+makeCacheMatrix <- function(matrixData = matrix()) {
+  asMatrix <- function() {
+    matrixData
+  }
+
+  inverse <- function() {
+    solve(matrixData)
+  }
+
+  list(asMatrix = asMatrix, inverse = inverse)
 }
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-  solve(x)
+cacheSolve <- function(cachingMatrix, ...) {
+  cachingMatrix$inverse()
 }
