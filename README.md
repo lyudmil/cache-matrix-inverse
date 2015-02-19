@@ -9,7 +9,7 @@ Things should be straightforward enough, but it's probably not a bad
 idea to go over it anyway. The folder structure is as follows:
 
 ```
-cache-matrix-inverse          root directory
+cache-matrix-inverse          working directory for my solution
 |
 +-- test/                     directory containing unit tests
 |   |
