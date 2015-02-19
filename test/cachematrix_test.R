@@ -13,8 +13,28 @@ test.cacheSolveReturnsTheInverseOfTheMatrixGivenToIt <- function() {
 }
 
 test.makeCacheMatrixReturnsAnObjectThatCanCalculateItsInverse <- function() {
-  cachingMatrix = makeCacheMatrix(a)
+  cachingMatrix <- makeCacheMatrix(a)
 
   checkEquals(inverseOfA, cachingMatrix$inverse())
   checkEquals(a, cachingMatrix$asMatrix())
+}
+
+test.matrixInversesGetCached <- function() {
+  numberOfTimesInverceCalculated <- 0
+  mockInvert <- function(x) {
+    numberOfTimesInverceCalculated <<- numberOfTimesInverceCalculated + 1
+    solve(x)
+  }
+
+  cachingMatrix <- makeCacheMatrix(a, invertMatrix = mockInvert)
+
+  checkEquals(0, numberOfTimesInverceCalculated)
+  checkEquals(inverseOfA, cachingMatrix$inverse())
+  checkEquals(1, numberOfTimesInverceCalculated)
+
+  checkEquals(inverseOfA, cachingMatrix$inverse())
+  checkEquals(1, numberOfTimesInverceCalculated)
+
+  checkEquals(inverseOfA, cachingMatrix$inverse())
+  checkEquals(1, numberOfTimesInverceCalculated)
 }
